@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
@@ -16,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ValidatorTest {
+
+    static final int POSITIVE = 100;
+    static final int NEGATIVE = -13;
 
     @BeforeAll
     public static void globalSetUp() {
@@ -107,7 +109,7 @@ public class ValidatorTest {
 
     @Test
     public void defaultIntTest() {
-        Validator v = new Validator(10);
+        Validator v = new Validator(POSITIVE);
         NumberSchema schema = v.number();
         assertEquals(schema.required(), true);
     }
@@ -121,7 +123,7 @@ public class ValidatorTest {
 
     @Test
     public void positiveIntPositiveTest() {
-        Validator v = new Validator(137);
+        Validator v = new Validator(POSITIVE);
         NumberSchema schema = v.number();
         assertEquals(schema.positive(), true);
     }
@@ -135,25 +137,25 @@ public class ValidatorTest {
 
     @Test
     public void negativeIntPositiveTest() {
-        Validator v = new Validator(-13);
+        Validator v = new Validator(NEGATIVE);
         NumberSchema schema = v.number();
         assertEquals(schema.positive(), false);
     }
 
     @Test
     public void positiveRangeIntTest() {
-        Validator v = new Validator(13);
+        Validator v = new Validator(POSITIVE);
         NumberSchema schema = v.number();
-        assertEquals(schema.range(0, 100), true);
-        assertEquals(schema.range(-100, 0), false);
-        assertEquals(schema.range(0, 100), true);
+        assertEquals(schema.range(0, POSITIVE), true);
+        assertEquals(schema.range(NEGATIVE, 0), false);
+        assertEquals(schema.range(0, POSITIVE), true);
     }
 
     @Test
     public void negativeRangeIntTest() {
-        Validator v = new Validator(-13);
+        Validator v = new Validator(NEGATIVE);
         NumberSchema schema = v.number();
-        assertEquals(schema.range(-100, 100), true);
+        assertEquals(schema.range(NEGATIVE, POSITIVE), true);
     }
 
     @Test
@@ -217,6 +219,4 @@ public class ValidatorTest {
         assertEquals(schema.required(), true);
         assertEquals(schema.sizeof(2), false);
     }*/
-
-
 }
