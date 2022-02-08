@@ -6,22 +6,22 @@ import hexlet.code.schemas.StringSchema;
 
 public class Validator {
 
-    Object value;
+    private static Object value;
 
     public Validator(Object o) {
-        this.value = o;
+        value = o;
     }
 
 
-    public StringSchema string() {
+    public static StringSchema string() {
         return new StringSchema(value);
     }
 
-    public NumberSchema number() {
+    public static NumberSchema number() {
         return new NumberSchema(value);
     }
 
-    public MapSchema map() {
+    public static MapSchema map() {
         return new MapSchema(value);
     }
 }

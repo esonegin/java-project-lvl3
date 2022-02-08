@@ -1,21 +1,21 @@
 package hexlet.code.schemas;
 
 public class NumberSchema extends BaseSchema {
-    Object value;
+    private static Object value;
 
     public NumberSchema(Object o) {
-        this.value = o;
+        value = o;
     }
 
-    public Boolean required() {
+    public static Boolean required() {
         return isValid(value, "Integer");
     }
 
-    public Boolean positive() {
-        return required() && (Integer)value > 0;
+    public static Boolean positive() {
+        return required() && (Integer) value > 0;
     }
 
-    public Boolean range(int min, int max) {
+    public static Boolean range(int min, int max) {
         return (Integer) value >= min && (Integer) value <= max;
     }
 }

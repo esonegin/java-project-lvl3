@@ -1,21 +1,22 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MapSchema extends BaseSchema {
-    Object value;
+    private static Object value;
 
     public MapSchema(Object o) {
-        this.value = o;
+        value = o;
     }
 
-    public Boolean required() {
+    public static Boolean required() {
         return isValid(value, "Map");
     }
 
-    public Boolean sizeof(int size) {
-        if(!isValid(value, "Map")){
+    public static Boolean sizeof(int size) {
+        if (!isValid(value, "Map")) {
             return false;
         }
         ObjectMapper oMapper = new ObjectMapper();

@@ -141,6 +141,22 @@ public class ValidatorTest {
     }
 
     @Test
+    public void positiveRangeIntTest() {
+        Validator v = new Validator(13);
+        NumberSchema schema = v.number();
+        assertEquals(schema.range(0, 100), true);
+        assertEquals(schema.range(-100, 0), false);
+        assertEquals(schema.range(0, 100), true);
+    }
+
+    @Test
+    public void negativeRangeIntTest() {
+        Validator v = new Validator(-13);
+        NumberSchema schema = v.number();
+        assertEquals(schema.range(-100, 100), true);
+    }
+
+    @Test
     public void nullMapTest() {
         Validator v = new Validator(null);
         MapSchema schema = v.map();
@@ -201,8 +217,6 @@ public class ValidatorTest {
         assertEquals(schema.required(), true);
         assertEquals(schema.sizeof(2), false);
     }*/
-
-
 
 
 }
