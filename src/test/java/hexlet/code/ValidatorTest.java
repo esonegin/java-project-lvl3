@@ -30,6 +30,52 @@ public class ValidatorTest {
     }
 
     @Test
+    public void notValidalidNullTest() {
+        Validator v = new Validator(null);
+        NumberSchema i = v.number();
+        assertEquals(i.isValid(), false);
+        StringSchema s = v.string();
+        assertEquals(s.isValid(), false);
+        MapSchema m = v.map();
+        assertEquals(m.isValid(), false);
+    }
+
+    @Test
+    public void validNumberTest() {
+        Validator v = new Validator(3);
+        NumberSchema i = v.number();
+        assertEquals(i.isValid(), true);
+        StringSchema s = v.string();
+        assertEquals(s.isValid(), false);
+        MapSchema m = v.map();
+        assertEquals(m.isValid(), false);
+    }
+
+    @Test
+    public void validStringTest() {
+        Validator v = new Validator("cwecew");
+        NumberSchema i = v.number();
+        assertEquals(i.isValid(), false);
+        StringSchema s = v.string();
+        assertEquals(s.isValid(), true);
+        MapSchema m = v.map();
+        assertEquals(m.isValid(), false);
+    }
+
+    @Test
+    public void validMapTest() {
+        Map<String, String> data = new HashMap<>();
+        data.put("key1", "value1");
+        Validator v = new Validator(data);
+        NumberSchema i = v.number();
+        assertEquals(i.isValid(), false);
+        StringSchema s = v.string();
+        assertEquals(s.isValid(), false);
+        MapSchema m = v.map();
+        assertEquals(m.isValid(), true);
+    }
+
+    @Test
     public void emptyStringTest() {
         Validator v = new Validator("");
         StringSchema schema = v.string();

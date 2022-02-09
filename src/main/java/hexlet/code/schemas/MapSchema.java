@@ -1,5 +1,6 @@
 package hexlet.code.schemas;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,12 +12,18 @@ public class MapSchema extends BaseSchema {
         value = o;
     }
 
-    public static Boolean required() {
-        return isValid(value, "Map");
+    @Override
+    public final Boolean isValid() {
+        return value instanceof HashMap<?, ?>;
     }
 
-    public static Boolean sizeof(int size) {
-        if (!isValid(value, "Map")) {
+    @Override
+    public final Boolean required() {
+        return isValid();
+    }
+
+    public final Boolean sizeof(int size) {
+        if (!isValid()) {
             return false;
         }
         ObjectMapper oMapper = new ObjectMapper();

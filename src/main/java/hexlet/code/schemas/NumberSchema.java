@@ -7,11 +7,17 @@ public class NumberSchema extends BaseSchema {
         value = o;
     }
 
-    public static Boolean required() {
-        return isValid(value, "Integer");
+    @Override
+    public final Boolean isValid() {
+        return NumberSchema.value instanceof Integer;
     }
 
-    public static Boolean positive() {
+    @Override
+    public final Boolean required() {
+        return isValid();
+    }
+
+    public final Boolean positive() {
         return required() && (Integer) value > 0;
     }
 

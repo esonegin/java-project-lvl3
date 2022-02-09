@@ -8,8 +8,14 @@ public class StringSchema extends BaseSchema {
         value = o;
     }
 
-    public static Boolean required() {
-        return isValid(value, "String") && String.valueOf(value).length() > 0;
+    @Override
+    public final Boolean isValid() {
+        return value instanceof String;
+    }
+
+    @Override
+    public final Boolean required() {
+        return isValid() && String.valueOf(value).length() > 0;
     }
 
     public static Boolean minLength(int len) {
