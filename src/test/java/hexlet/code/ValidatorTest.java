@@ -42,7 +42,7 @@ public class ValidatorTest {
 
     @Test
     public void validNumberTest() {
-        Validator v = new Validator(3);
+        Validator v = new Validator(POSITIVE);
         NumberSchema i = v.number();
         assertEquals(i.isValid(), true);
         StringSchema s = v.string();
