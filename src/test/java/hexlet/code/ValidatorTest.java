@@ -36,7 +36,7 @@ public class ValidatorTest {
         assertEquals(s.isValid(""), true);
     }
 
-   @Test
+    @Test
     public void notValidalidNullTest() {
         Validator v = new Validator();
         NumberSchema i = v.number();
@@ -114,21 +114,21 @@ public class ValidatorTest {
     public void defaultMinLengthTest() {
         Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.minLength(" ",1), true);
+        assertEquals(schema.minLength(" ", 1), true);
     }
 
     @Test
     public void outofMinLengthTest1() {
         Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.minLength("",1), false);
+        assertEquals(schema.minLength("", 1), false);
     }
 
     @Test
     public void outofMinLengthTest2() {
         Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.minLength("22",1), true);
+        assertEquals(schema.minLength("22", 1), true);
     }
 
     @Test
@@ -216,7 +216,7 @@ public class ValidatorTest {
         Validator v = new Validator();
         MapSchema schema = v.map();
         assertEquals(schema.required(null), false);
-        assertEquals(schema.sizeof(null,0), false);
+        assertEquals(schema.sizeof(null, 0), false);
     }
 
     @Test
@@ -242,7 +242,7 @@ public class ValidatorTest {
         Validator v = new Validator();
         MapSchema schema = v.map();
         assertEquals(schema.required(data), true);
-        assertEquals(schema.sizeof(data,1), true);
+        assertEquals(schema.sizeof(data, 1), true);
 
     }
 
@@ -253,7 +253,7 @@ public class ValidatorTest {
         Validator v = new Validator();
         MapSchema schema = v.map();
         assertEquals(schema.required(data), true);
-        assertEquals(schema.sizeof(data,2), false);
+        assertEquals(schema.sizeof(data, 2), false);
     }
 
     /*@Test
