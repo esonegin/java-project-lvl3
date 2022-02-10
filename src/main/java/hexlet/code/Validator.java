@@ -8,9 +8,9 @@ public class Validator {
 
     private static Object value;
 
-    public Validator(Object o) {
+    /*public Validator(Object o) {
         value = o;
-    }
+    }*/
 
 
     public static StringSchema string() {

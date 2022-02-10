@@ -13,20 +13,20 @@ public class MapSchema extends BaseSchema {
     }
 
     @Override
-    public final Boolean isValid() {
-        return value instanceof HashMap<?, ?>;
+    public final Boolean isValid(Object v) {
+        return v instanceof HashMap<?, ?>;
     }
 
     @Override
-    public final Boolean required() {
-        return isValid();
+    public final Boolean required(Object v) {
+        return isValid(v);
     }
 
-    public final Boolean sizeof(int size) {
-        if (!isValid()) {
+    public final Boolean sizeof(Object v, int size) {
+        if (!isValid(v)) {
             return false;
         }
         ObjectMapper oMapper = new ObjectMapper();
-        return oMapper.convertValue(value, Map.class).size() == size;
+        return oMapper.convertValue(v, Map.class).size() == size;
     }
 }

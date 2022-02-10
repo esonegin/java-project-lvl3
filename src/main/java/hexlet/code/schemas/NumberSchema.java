@@ -8,20 +8,20 @@ public class NumberSchema extends BaseSchema {
     }
 
     @Override
-    public final Boolean isValid() {
-        return NumberSchema.value instanceof Integer;
+    public final Boolean isValid(Object v) {
+        return v instanceof Integer;
     }
 
     @Override
-    public final Boolean required() {
-        return isValid();
+    public final Boolean required(Object v) {
+        return isValid(v);
     }
 
-    public final Boolean positive() {
-        return required() && (Integer) value > 0;
+    public final Boolean positive(Object v) {
+        return required(v) && (Integer) v > 0;
     }
 
-    public static Boolean range(int min, int max) {
-        return (Integer) value >= min && (Integer) value <= max;
+    public static Boolean range(Object v, int min, int max) {
+        return (Integer) v >= min && (Integer) v <= max;
     }
 }

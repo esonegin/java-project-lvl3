@@ -30,212 +30,219 @@ public class ValidatorTest {
     }
 
     @Test
-    public void notValidalidNullTest() {
-        Validator v = new Validator(null);
-        NumberSchema i = v.number();
-        assertEquals(i.isValid(), false);
+    public void serverTest() {
+        Validator v = new Validator();
         StringSchema s = v.string();
-        assertEquals(s.isValid(), false);
+        assertEquals(s.isValid(""), true);
+    }
+
+   @Test
+    public void notValidalidNullTest() {
+        Validator v = new Validator();
+        NumberSchema i = v.number();
+        assertEquals(i.isValid(null), false);
+        StringSchema s = v.string();
+        assertEquals(s.isValid(null), false);
         MapSchema m = v.map();
-        assertEquals(m.isValid(), false);
+        assertEquals(m.isValid(null), false);
     }
 
     @Test
     public void validNumberTest() {
-        Validator v = new Validator(POSITIVE);
+        Validator v = new Validator();
         NumberSchema i = v.number();
-        assertEquals(i.isValid(), true);
+        assertEquals(i.isValid(POSITIVE), true);
         StringSchema s = v.string();
-        assertEquals(s.isValid(), false);
+        assertEquals(s.isValid(POSITIVE), false);
         MapSchema m = v.map();
-        assertEquals(m.isValid(), false);
+        assertEquals(m.isValid(POSITIVE), false);
     }
 
     @Test
     public void validStringTest() {
-        Validator v = new Validator("cwecew");
+        Validator v = new Validator();
         NumberSchema i = v.number();
-        assertEquals(i.isValid(), false);
+        assertEquals(i.isValid("cwecew"), false);
         StringSchema s = v.string();
-        assertEquals(s.isValid(), true);
+        assertEquals(s.isValid("cwecew"), true);
         MapSchema m = v.map();
-        assertEquals(m.isValid(), false);
+        assertEquals(m.isValid("cwecew"), false);
     }
 
     @Test
     public void validMapTest() {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
-        Validator v = new Validator(data);
+        Validator v = new Validator();
         NumberSchema i = v.number();
-        assertEquals(i.isValid(), false);
+        assertEquals(i.isValid(data), false);
         StringSchema s = v.string();
-        assertEquals(s.isValid(), false);
+        assertEquals(s.isValid(data), false);
         MapSchema m = v.map();
-        assertEquals(m.isValid(), true);
+        assertEquals(m.isValid(data), true);
     }
 
     @Test
     public void emptyStringTest() {
-        Validator v = new Validator("");
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.required(), false);
+        assertEquals(schema.required(""), false);
     }
 
     @Test
     public void nullStringTest() {
-        Validator v = new Validator(null);
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.required(), false);
+        assertEquals(schema.required(null), false);
     }
 
     @Test
     public void defaultRequiredStringTest() {
-        Validator v = new Validator("v");
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.required(), true);
+        assertEquals(schema.required("v"), true);
     }
 
     @Test
     public void spaceStringTest() {
-        Validator v = new Validator(" ");
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.required(), true);
+        assertEquals(schema.required(" "), true);
     }
 
     @Test
     public void defaultMinLengthTest() {
-        Validator v = new Validator(" ");
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.minLength(1), true);
+        assertEquals(schema.minLength(" ",1), true);
     }
 
     @Test
     public void outofMinLengthTest1() {
-        Validator v = new Validator("");
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.minLength(1), false);
+        assertEquals(schema.minLength("",1), false);
     }
 
     @Test
     public void outofMinLengthTest2() {
-        Validator v = new Validator("22");
+        Validator v = new Validator();
         StringSchema schema = v.string();
-        assertEquals(schema.minLength(1), true);
+        assertEquals(schema.minLength("22",1), true);
     }
 
     @Test
     public void trueContainsTest() {
-        Validator v = new Validator("""
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+        assertEquals(schema.contains("""
                 «Мой дядя самых честных правил,
                 Когда не в шутку занемог,
                 Он уважать себя заставил
-                \s""");
-        StringSchema schema = v.string();
-        assertEquals(schema.contains("утк"), true);
+                \s""", "утк"), true);
     }
 
     @Test
     public void falseContainsTest() {
-        Validator v = new Validator("""
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+        assertEquals(schema.contains("""
                 «Мой дядя самых честных правил,
                 Когда не в шутку занемог,
                 Он уважать себя заставил
-                \s""");
-        StringSchema schema = v.string();
-        assertEquals(schema.contains("fwevwe"), false);
+                \s""", "fwevwe"), false);
     }
 
     @Test
     public void nullIntTest() {
-        Validator v = new Validator(null);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.required(), false);
+        assertEquals(schema.required(null), false);
     }
 
     @Test
     public void defaultIntTest() {
-        Validator v = new Validator(POSITIVE);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.required(), true);
+        assertEquals(schema.required(POSITIVE), true);
     }
 
     @Test
     public void stringIntTest() {
-        Validator v = new Validator("5");
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.required(), false);
+        assertEquals(schema.required("5"), false);
     }
 
     @Test
     public void positiveIntPositiveTest() {
-        Validator v = new Validator(POSITIVE);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.positive(), true);
+        assertEquals(schema.positive(POSITIVE), true);
     }
 
     @Test
     public void zeroIntPositiveTest() {
-        Validator v = new Validator(0);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.positive(), false);
+        assertEquals(schema.positive(0), false);
     }
 
     @Test
     public void negativeIntPositiveTest() {
-        Validator v = new Validator(NEGATIVE);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.positive(), false);
+        assertEquals(schema.positive(NEGATIVE), false);
     }
 
     @Test
     public void positiveRangeIntTest() {
-        Validator v = new Validator(POSITIVE);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.range(0, POSITIVE), true);
-        assertEquals(schema.range(NEGATIVE, 0), false);
-        assertEquals(schema.range(0, POSITIVE), true);
+        assertEquals(schema.range(POSITIVE, 0, POSITIVE), true);
+        assertEquals(schema.range(POSITIVE, NEGATIVE, 0), false);
+        assertEquals(schema.range(POSITIVE, 0, POSITIVE), true);
     }
 
     @Test
     public void negativeRangeIntTest() {
-        Validator v = new Validator(NEGATIVE);
+        Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.range(NEGATIVE, POSITIVE), true);
+        assertEquals(schema.range(NEGATIVE, NEGATIVE, POSITIVE), true);
     }
 
     @Test
     public void nullMapTest() {
-        Validator v = new Validator(null);
+        Validator v = new Validator();
         MapSchema schema = v.map();
-        assertEquals(schema.required(), false);
-        assertEquals(schema.sizeof(0), false);
+        assertEquals(schema.required(null), false);
+        assertEquals(schema.sizeof(null,0), false);
     }
 
     @Test
     public void emptyMapTest() {
-        Validator v = new Validator(new HashMap());
+        Validator v = new Validator();
         MapSchema schema = v.map();
-        assertEquals(schema.required(), true);
+        assertEquals(schema.required(new HashMap()), true);
     }
 
     @Test
     public void notEmptyMapTest() {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
-        Validator v = new Validator(data);
+        Validator v = new Validator();
         MapSchema schema = v.map();
-        assertEquals(schema.required(), true);
+        assertEquals(schema.required(data), true);
     }
 
     @Test
     public void sizeOfTrueMapTest() {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
-        Validator v = new Validator(data);
+        Validator v = new Validator();
         MapSchema schema = v.map();
-        assertEquals(schema.required(), true);
-        assertEquals(schema.sizeof(1), true);
+        assertEquals(schema.required(data), true);
+        assertEquals(schema.sizeof(data,1), true);
 
     }
 
@@ -243,13 +250,13 @@ public class ValidatorTest {
     public void sizeOfNotTrueMapTest() {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
-        Validator v = new Validator(data);
+        Validator v = new Validator();
         MapSchema schema = v.map();
-        assertEquals(schema.required(), true);
-        assertEquals(schema.sizeof(2), false);
+        assertEquals(schema.required(data), true);
+        assertEquals(schema.sizeof(data,2), false);
     }
-/*
-    @Test
+
+    /*@Test
     public void nestedValidationTest() {
 
         //MapSchema schema = v.map();

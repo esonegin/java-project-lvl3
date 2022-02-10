@@ -4,7 +4,7 @@ package hexlet.code.schemas;
 public abstract class BaseSchema {
     //private static Object value;
 
-    public abstract Boolean isValid();
+    public abstract Boolean isValid(Object o);
 
-    public abstract Boolean required();
+    public abstract Boolean required(Object o);
 }

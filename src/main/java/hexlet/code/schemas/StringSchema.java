@@ -9,20 +9,20 @@ public class StringSchema extends BaseSchema {
     }
 
     @Override
-    public final Boolean isValid() {
-        return value instanceof String;
+    public final Boolean isValid(Object v) {
+        return v instanceof String;
     }
 
     @Override
-    public final Boolean required() {
-        return isValid() && String.valueOf(value).length() > 0;
+    public final Boolean required(Object v) {
+        return isValid(v) && String.valueOf(v).length() > 0;
     }
 
-    public static Boolean minLength(int len) {
-        return String.valueOf(value).length() >= len;
+    public static Boolean minLength(Object v, int len) {
+        return String.valueOf(v).length() >= len;
     }
 
-    public static Boolean contains(String s) {
-        return String.valueOf(value).contains(s);
+    public static Boolean contains(Object v, String s) {
+        return String.valueOf(v).contains(s);
     }
 }
