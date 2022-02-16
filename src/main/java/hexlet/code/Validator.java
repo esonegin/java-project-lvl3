@@ -5,23 +5,15 @@ import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 
 public class Validator {
-
-    private static Object value;
-
-    /*public Validator(Object o) {
-        value = o;
-    }*/
-
-
     public static StringSchema string() {
-        return new StringSchema(value);
+        return new StringSchema();
     }
 
     public static NumberSchema number() {
-        return new NumberSchema(value);
+        return new NumberSchema();
     }
 
     public static MapSchema map() {
-        return new MapSchema(value);
+        return new MapSchema();
     }
 }
