@@ -18,8 +18,11 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public final Boolean isValid(Object v) {
-        if (!required && v == null) {
+        if (!required && !(v instanceof Integer)) {
             return true;
+        }
+        if (required && !(v instanceof Integer)) {
+            return false;
         }
         for (Predicate<Object> check : checks) {
             if (!check.test(v)) {

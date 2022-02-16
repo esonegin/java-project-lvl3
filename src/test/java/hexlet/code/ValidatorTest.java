@@ -46,18 +46,22 @@ public class ValidatorTest {
         assertEquals(schema.isValid("what does the fox say"), false); // false
     }
 
-   /* @Test
+    @Test
     public void defaultIntTest() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
-        assertEquals(schema.isValid(null), true); // true
+        assertEquals(schema.isValid(null), true);
+        assertEquals(schema.isValid(POSITIVE), true);
+        assertEquals(schema.isValid("5"), true);
+        assertEquals(schema.isValid(NEGATIVE), true);
+        assertEquals(schema.positive().isValid(POSITIVE), true);
         schema.required();
         assertEquals(schema.isValid(null), false); // false
         assertEquals(schema.isValid(POSITIVE), true); // true
         assertEquals(schema.isValid("5"), false); // false
         assertEquals(schema.positive().isValid(POSITIVE), true); // true
         assertEquals(schema.isValid(NEGATIVE), false); // false
-    }*/
+    }
 
     @Test
     public void serverTest() {
