@@ -1,51 +1,26 @@
 package hexlet.code.schemas;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 public class NumberSchema extends BaseSchema {
 
-    private static List<Predicate<Object>> checks;
-
     public NumberSchema() {
-        checks = new ArrayList<>();
+        setRequired(false);
     }
-
-    private Boolean required = false;
-
 
     @Override
-    public final Boolean isValid(Object v) {
-        if (!required && !(v instanceof Integer)) {
-            return true;
-        }
-        if (required && !(v instanceof Integer)) {
-            return false;
-        }
-        for (Predicate<Object> check : checks) {
-            if (!check.test(v)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public final NumberSchema required() {
-        checks.add(x -> x instanceof Integer);
-        required = true;
+        setPredicate(x -> x instanceof Integer);
+        setRequired(true);
         return this;
     }
 
     public final NumberSchema positive() {
-        checks.add(Objects::nonNull);
-        checks.add(x -> (Integer) x > 0);
+        setPredicate(x -> x instanceof Integer && (int) x > 0);
         return this;
     }
 
     public final NumberSchema range(int min, int max) {
-        checks.add(x -> (Integer) x >= min && (Integer) x <= max);
+        setPredicate(x -> (Integer) x >= min && (Integer) x <= max);
         return this;
     }
 }

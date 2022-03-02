@@ -6,7 +6,7 @@
  */
 plugins {
     id 'com.github.ben-manes.versions' version '0.39.0'
-    id 'application'
+    id 'java'
     id 'checkstyle'
     id 'jacoco'
 }
@@ -23,11 +23,6 @@ jacocoTestReport {
     }
 }
 
-
-application {
-    mainClass = 'hexlet.code.App'
-}
-
 compileJava {
     options.release = 16
 }
@@ -36,9 +31,11 @@ repositories {
     mavenCentral()
 }
 
+/*
 run {
     standardInput = System.in
 }
+*/
 
 checkstyle {
     toolVersion '9.0'
@@ -46,16 +43,6 @@ checkstyle {
 
 dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1'
-    implementation 'info.picocli:picocli:4.6.2'
-
-    annotationProcessor 'info.picocli:picocli-codegen:4.6.2'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-    implementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
-    implementation 'org.junit.platform:junit-platform-suite:1.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }

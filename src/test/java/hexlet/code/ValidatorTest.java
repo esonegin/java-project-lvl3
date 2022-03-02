@@ -195,7 +195,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void nullRequiredTest() {
+    public void nullRequiredNumberTest() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
         assertEquals(schema.positive().isValid(null), true);
