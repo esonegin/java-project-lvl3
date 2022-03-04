@@ -1,11 +1,8 @@
 package hexlet.code.schemas;
 
-import java.util.ArrayList;
-
 public class StringSchema extends BaseSchema {
 
     public StringSchema() {
-        //setChecks(new ArrayList<>());
         setRequired(false);
     }
 

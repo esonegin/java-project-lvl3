@@ -27,9 +27,7 @@ public class MapSchema extends BaseSchema {
     }
 
     public final void shape(Map<String, BaseSchema> schemas) {
-
-        setPredicate((Map<String, BaseSchema> toCheck) -> schemas.entrySet().stream()
+        setPredicate((Map<String, Object> toCheck) -> schemas.entrySet().stream()
                 .allMatch(node -> node.getValue().isValid(toCheck.get(node.getKey()))));
-        setShape(true);
     }
 }
