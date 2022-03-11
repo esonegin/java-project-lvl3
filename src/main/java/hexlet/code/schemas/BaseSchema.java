@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema {
-    private List<Predicate<Object>> checks = new ArrayList<>();
+    private final List<Predicate<Object>> checks = new ArrayList<>();
     private Boolean required = false;
-
 
     public abstract BaseSchema required();
 
-    protected final void setPredicate(Predicate<?> predicate) {
-        checks.add((Predicate<Object>) predicate);
+    protected final void req(Class obj) {
+        addCheck(obj::isInstance);
+        setRequired(true);
+    }
+
+    protected final void addCheck(Predicate<Object> predicate) {
+        checks.add(predicate);
     }
 
     public final Boolean isValid(Object v) {
@@ -25,10 +29,6 @@ public abstract class BaseSchema {
             }
         }
         return true;
-    }
-
-    public final void setChecks(List<Predicate<Object>> check) {
-        checks = check;
     }
 
     public final void setRequired(Boolean req) {

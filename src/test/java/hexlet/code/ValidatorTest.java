@@ -62,10 +62,15 @@ public class ValidatorTest {
     }
 
     @Test
-    public void serverTest() {
+    public void defaultIntRangeTest() {
         Validator v = new Validator();
-        StringSchema s = v.string();
-        assertEquals(s.isValid(""), true);
+        NumberSchema schema = v.number();
+        schema.required();
+        schema.range(5, 10);
+        assertEquals(schema.isValid(5), true); // false
+        assertEquals(schema.isValid(10), true); // true
+        assertEquals(schema.isValid(4), false); // false
+        assertEquals(schema.isValid(11), false); // true
     }
 
     @Test
@@ -99,38 +104,10 @@ public class ValidatorTest {
     }
 
     @Test
-    public void defaultRequiredStringTest() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        assertEquals(schema.required().isValid("v"), true);
-    }
-
-    @Test
-    public void spaceStringTest() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        assertEquals(schema.required().isValid(" "), true);
-    }
-
-    @Test
     public void defaultMinLengthTest() {
         Validator v = new Validator();
         StringSchema schema = v.string();
         assertEquals(schema.minLength(1).isValid(" "), true);
-    }
-
-    @Test
-    public void outofMinLengthTest1() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        assertEquals(schema.minLength(1).isValid(""), false);
-    }
-
-    @Test
-    public void outofMinLengthTest2() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        assertEquals(schema.minLength(1).isValid("22"), true);
     }
 
     @Test
@@ -153,66 +130,6 @@ public class ValidatorTest {
                   Когда не в шутку занемог,
                   Он уважать себя заставил
                 \s"""), false);
-    }
-
-    @Test
-    public void positiveIntPositiveTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.positive().isValid(POSITIVE), true);
-    }
-
-    @Test
-    public void zeroIntPositiveTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.positive().isValid(0), false);
-    }
-
-
-    @Test
-    public void nullIntPositiveTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.positive().isValid(null), true);
-    }
-
-    @Test
-    public void nullIntRequiredPositiveTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.required().positive().isValid(null), false);
-    }
-
-
-    @Test
-    public void negativeIntPositiveTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.positive().isValid(NEGATIVE), false);
-    }
-
-    @Test
-    public void nullRequiredNumberTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.positive().isValid(null), true);
-    }
-
-    @Test
-    public void positiveRangeIntTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.range(0, POSITIVE).isValid(POSITIVE), true);
-        assertEquals(schema.range(NEGATIVE, 0).isValid(POSITIVE), false);
-        assertEquals(schema.range(0, POSITIVE).isValid(POSITIVE), false);
-    }
-
-    @Test
-    public void negativeRangeIntTest() {
-        Validator v = new Validator();
-        NumberSchema schema = v.number();
-        assertEquals(schema.range(NEGATIVE, POSITIVE).isValid(NEGATIVE), true);
     }
 
     @Test
