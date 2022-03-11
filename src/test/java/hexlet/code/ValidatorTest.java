@@ -17,6 +17,10 @@ public class ValidatorTest {
 
     static final int POSITIVE = 100;
     static final int NEGATIVE = -13;
+    static final int RANGESTART = 5;
+    static final int RANGEFINISH = 10;
+    static final int RANGEOUTPLUS = 11;
+    static final int RANGEOUTMINUS = 4;
 
     @BeforeAll
     public static void globalSetUp() {
@@ -66,11 +70,11 @@ public class ValidatorTest {
         Validator v = new Validator();
         NumberSchema schema = v.number();
         schema.required();
-        schema.range(5, 10);
-        assertEquals(schema.isValid(5), true); // false
-        assertEquals(schema.isValid(10), true); // true
-        assertEquals(schema.isValid(4), false); // false
-        assertEquals(schema.isValid(11), false); // true
+        schema.range(RANGESTART, RANGEFINISH);
+        assertEquals(schema.isValid(RANGESTART), true); // false
+        assertEquals(schema.isValid(RANGEFINISH), true); // true
+        assertEquals(schema.isValid(RANGEOUTMINUS), false); // false
+        assertEquals(schema.isValid(RANGEOUTPLUS), false); // true
     }
 
     @Test
