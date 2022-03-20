@@ -12,7 +12,7 @@ public abstract class BaseSchema {
 
     protected final void req(Class obj) {
         addCheck(obj::isInstance);
-        setRequired(true);
+        required = true;
     }
 
     protected final void addCheck(Predicate<Object> predicate) {
@@ -30,10 +30,5 @@ public abstract class BaseSchema {
         }
         return true;
     }
-
-    public final void setRequired(Boolean req) {
-        required = req;
-    }
-
 }
 

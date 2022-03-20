@@ -78,36 +78,6 @@ public class ValidatorTest {
     }
 
     @Test
-    public void notValidalidNullTest() {
-        Validator v = new Validator();
-        NumberSchema i = v.number();
-        i.required();
-        assertEquals(i.isValid(null), false);
-        StringSchema s = v.string();
-        s.required();
-        assertEquals(s.isValid(null), false);
-        MapSchema m = v.map();
-        m.required();
-        assertEquals(m.isValid(null), false);
-    }
-
-
-    @Test
-    public void emptyStringTest() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        assertEquals(schema.required().isValid(""), false);
-    }
-
-
-    @Test
-    public void nullStringTest() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        assertEquals(schema.required().isValid(null), false);
-    }
-
-    @Test
     public void defaultMinLengthTest() {
         Validator v = new Validator();
         StringSchema schema = v.string();
